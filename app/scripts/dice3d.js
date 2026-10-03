@@ -62,7 +62,7 @@ window.Dice3DRoller = {
   async rollMany(notations) {
     try {
       const dice = await startRoll();
-      return await dice.roll(notations.join(' + '), { newStartPoint: true });
+      return await dice.roll(notations, { newStartPoint: true });
     } catch (error) {
       document.querySelector('#dice-3d-overlay').hidden = true;
       throw error;
