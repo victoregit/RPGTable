@@ -17,8 +17,6 @@
   let directoryHandle = null, saveTimer = null, drawing = null, panning = null, tabletopRenderer = null, rendererRevision = 0, rolling = false;
   const diceSelection = new Map();
   const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
-  const rollOutput = $('.roll-output'), diceOverlay = $('#dice-3d-overlay');
-  if(rollOutput&&diceOverlay){rollOutput.insertAdjacentHTML('afterbegin','<div class="dice-tray" id="dice-tray" aria-label="Bandeja de rolagem"></div>');$('#dice-tray').append(diceOverlay)}
   const blankActive = () => ({id:crypto.randomUUID(),startedAt:new Date().toISOString(),updatedAt:null,notes:'',initiative:[],round:1,scenes:{},mapGroup:null,mapVersion:null,music:{id:'',time:0,volume:.7,playing:false},activeCharacterIds:[],participantsConfigured:false,inactiveMarkerPositions:{}});
   const state = {schema:2,campaignName:'',assets:[],notes:{},characters:{},history:[],active:blankActive(),selectedCharacter:null,openPanel:null,mapTool:'pan',resumed:false};
   const norm = value => (value || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
