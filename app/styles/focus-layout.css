@@ -8,12 +8,12 @@
 .scene-piece{width:52px;height:52px}
 
 .bottom-dock{min-height:68px!important;grid-template-columns:1fr!important;transition:min-height .2s ease}
-.character-tray{position:absolute;z-index:12;left:.7rem;bottom:calc(100% + .65rem);width:215px;padding:.3rem!important;overflow:visible;background:linear-gradient(135deg,#1a161ddd,#100e13dd);border:1px solid #4c424b;border-radius:8px;box-shadow:0 8px 20px #0009;backdrop-filter:blur(9px)}
+.character-tray{position:absolute;z-index:12;left:.7rem;bottom:calc(100% + .65rem);width:236px;padding:.3rem!important;overflow:visible;background:linear-gradient(135deg,#1a161ddd,#100e13dd);border:1px solid #4c424b;border-radius:8px;box-shadow:0 8px 20px #0009;backdrop-filter:blur(9px)}
 .tray-head{display:none}
-.character-list{display:grid;height:auto;grid-template-columns:repeat(3,65px);justify-content:center;overflow:visible;padding:0;gap:.35rem}
-.character-card{width:65px!important;min-width:65px!important;height:65px!important}
-.character-select,.character-card .character-select{width:65px!important;height:65px!important;border-radius:50%!important}
-.character-card .character-select img,.character-card .character-select .placeholder{width:65px!important;height:65px!important;border-radius:50%;object-fit:contain!important}
+.character-list{display:grid;height:auto;grid-template-columns:repeat(3,72px);justify-content:center;overflow:visible;padding:0;gap:.35rem}
+.character-card{width:72px!important;min-width:72px!important;height:72px!important}
+.character-select,.character-card .character-select{width:72px!important;height:72px!important;border-radius:50%!important}
+.character-card .character-select img,.character-card .character-select .placeholder{width:72px!important;height:72px!important;border-radius:50%;object-fit:contain!important}
 .character-card.selected::after{content:none!important}
 .participant-toggle{right:-2px!important;top:-2px!important;width:16px!important;height:16px!important;font-size:.58rem!important;line-height:1!important}
 .dice-bar{border-left:0!important}
@@ -67,11 +67,11 @@
   .scene-status-card{grid-template-columns:44px 1fr;min-height:48px}
   .scene-piece{width:44px;height:44px}
   .bottom-dock{min-height:56px!important}
-  .character-tray{left:.45rem;bottom:calc(100% + .45rem);width:174px;padding:.25rem!important}
-  .character-list{grid-template-columns:repeat(3,53px);gap:.28rem}
-  .character-card{width:53px!important;min-width:53px!important;height:53px!important}
-  .character-select,.character-card .character-select{width:53px!important;height:53px!important}
-  .character-card .character-select img,.character-card .character-select .placeholder{width:53px!important;height:53px!important}
+  .character-tray{left:.45rem;bottom:calc(100% + .45rem);width:189px;padding:.25rem!important}
+  .character-list{grid-template-columns:repeat(3,58px);gap:.28rem}
+  .character-card{width:58px!important;min-width:58px!important;height:58px!important}
+  .character-select,.character-card .character-select{width:58px!important;height:58px!important}
+  .character-card .character-select img,.character-card .character-select .placeholder{width:58px!important;height:58px!important}
   .dice-arena{height:56px!important;grid-template-rows:56px 0 0!important}
   .dice-arena-controls{height:56px;overflow:hidden;flex-wrap:nowrap}
   .arena-inputs{gap:.25rem;min-width:0}
