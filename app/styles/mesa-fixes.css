@@ -179,7 +179,6 @@
 @keyframes die-land{0%{transform:translateY(-6px) scale(1.1)}62%{transform:translateY(2px) scale(.92)}100%{transform:translateY(0) scale(1)}}
 @keyframes shortcut-press{50%{transform:translateY(-2px);box-shadow:0 0 13px #d5a45d77}}
 @media(prefers-reduced-motion:reduce){.roll-die.rolling,.roll-die.landed,.dice-shortcuts button.rolling{animation:none}}
-@media(max-width:700px){.dice-3d-overlay{bottom:207px;width:calc(100vw - 4.8rem);height:185px;border-radius:14px}}
 .side-panel{top:16px}
 .piece-rail{top:74px}
 @media(max-width:1040px){

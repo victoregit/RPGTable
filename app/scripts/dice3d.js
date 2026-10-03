@@ -4,10 +4,23 @@ let tableBounds = null;
 let stageSize = '';
 let diceOnTable = false;
 
+function stageLayout() {
+  const overlay = document.querySelector('#dice-3d-overlay');
+  if (!overlay || !tableBounds?.points?.length) return null;
+  const overlayRect = overlay.getBoundingClientRect();
+  const center = tableBounds.points.reduce((sum, point) => ({ x: sum.x + point.x / tableBounds.points.length, y: sum.y + point.y / tableBounds.points.length }), { x: 0, y: 0 });
+  const safePoints = tableBounds.points.map(point => ({ x: center.x + (point.x - center.x) * .84 - overlayRect.left, y: center.y + (point.y - center.y) * .78 - overlayRect.top }));
+  const xs = safePoints.map(point => point.x), ys = safePoints.map(point => point.y);
+  const left = Math.min(...xs), top = Math.min(...ys), right = Math.max(...xs), bottom = Math.max(...ys);
+  const width = Math.max(1, right - left), height = Math.max(1, bottom - top);
+  return { left, top, width, height, clip: safePoints.map(point => `${((point.x - left) / width * 100).toFixed(3)}% ${((point.y - top) / height * 100).toFixed(3)}%`).join(',') };
+}
+
 function applyTableBounds({ resize = false } = {}) {
   const stage = document.querySelector('#dice-stage');
-  if (!stage || !tableBounds) return;
-  const { left, top, width, height, clip } = tableBounds;
+  const layout = stageLayout();
+  if (!stage || !layout) return;
+  const { left, top, width, height, clip } = layout;
   stage.style.left = `${left}px`;
   stage.style.top = `${top}px`;
   stage.style.width = `${width}px`;
@@ -31,8 +44,8 @@ async function prepare() {
       enableShadows: true,
       shadowTransparency: 0.65,
       lightIntensity: 1.15,
-      scale: 3.25,
-      delay: 65,
+      scale: 2.8,
+      delay: 48,
       offscreen: false,
     });
     await box.init();
@@ -47,9 +60,9 @@ window.Dice3DRoller = {
     const overlay = document.querySelector('#dice-3d-overlay');
     tableBounds = window.__tabletopBoardBounds || tableBounds;
     diceOnTable = false;
-    applyTableBounds();
     overlay.hidden = false;
     await new Promise(resolve => requestAnimationFrame(resolve));
+    applyTableBounds({ resize: true });
     try {
       const dice = await prepare();
       diceOnTable = true;
@@ -64,9 +77,9 @@ window.Dice3DRoller = {
     const overlay = document.querySelector('#dice-3d-overlay');
     tableBounds = window.__tabletopBoardBounds || tableBounds;
     diceOnTable = false;
-    applyTableBounds();
     overlay.hidden = false;
     await new Promise(resolve => requestAnimationFrame(resolve));
+    applyTableBounds({ resize: true });
     try {
       const dice = await prepare();
       diceOnTable = true;
@@ -85,6 +98,6 @@ window.Dice3DRoller = {
   },
   setTableBounds(bounds) {
     tableBounds = bounds;
-    applyTableBounds({ resize: true });
+    applyTableBounds({ resize: !diceOnTable });
   }
 };
