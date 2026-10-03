@@ -24,8 +24,25 @@ async function prepare() {
   catch (error) { started = null; box = null; throw error; }
 }
 
-async function startRoll() {
+function mountTray() {
   const overlay = document.querySelector('#dice-3d-overlay');
+  const output = document.querySelector('.roll-output');
+  if (!overlay || !output) return overlay;
+  let tray = document.querySelector('#dice-tray');
+  if (!tray) {
+    tray = document.createElement('div');
+    tray.id = 'dice-tray';
+    tray.className = 'dice-tray';
+    tray.setAttribute('aria-label', 'Bandeja de rolagem');
+    output.prepend(tray);
+  }
+  if (overlay.parentElement !== tray) tray.append(overlay);
+  return overlay;
+}
+
+async function startRoll() {
+  const overlay = mountTray();
+  if (!overlay) throw Error('Bandeja de rolagem indisponível');
   overlay.hidden = false;
   await new Promise(resolve => requestAnimationFrame(resolve));
   return prepare();
