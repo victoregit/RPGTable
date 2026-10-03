@@ -63,7 +63,7 @@ http.createServer(async (request, response) => {
   }
   fs.readFile(filename, (error, content) => {
     if (error) { response.writeHead(404).end('Arquivo não encontrado'); return; }
-    response.writeHead(200, { 'Content-Type': types[path.extname(filename).toLowerCase()] || 'application/octet-stream', 'Access-Control-Allow-Origin': '*' });
+    response.writeHead(200, { 'Content-Type': types[path.extname(filename).toLowerCase()] || 'application/octet-stream', 'Access-Control-Allow-Origin': '*', 'Cache-Control': 'no-store' });
     response.end(content);
   });
 }).listen(4173, '127.0.0.1', () => console.log('Central de Campanha: http://127.0.0.1:4173'));
