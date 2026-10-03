@@ -9,6 +9,7 @@
   const totalDice = () => [...selected.values()].reduce((sum, amount) => sum + amount, 0);
   const notation = (quantity, die, modifier = 0) => `${quantity}d${die}${modifier ? modifier > 0 ? `+${modifier}` : modifier : ''}`;
   const randomDie = die => Math.floor(Math.random() * die) + 1;
+  function setRollingBoxCollapsed(collapsed) { const arena = $('.dice-arena'), button = $('#toggle-dice-arena'); if (!arena || !button) return; arena.classList.toggle('rolling-box-hidden', collapsed); button.textContent = collapsed ? '▸' : '▾'; button.title = collapsed ? 'Mostrar mesa de rolagem' : 'Ocultar mesa de rolagem'; button.setAttribute('aria-label', button.title); button.setAttribute('aria-expanded', String(!collapsed)); }
 
   function setArenaState(state) {
     const arena = $('.dice-arena');
@@ -56,6 +57,7 @@
 
   async function runRoll(entries, modifier = 0) {
     if (rolling || !entries.length) return;
+    setRollingBoxCollapsed(false);
     rolling = true;
     lastRoll = null;
     window.Dice3DRoller?.clear();
@@ -110,7 +112,7 @@
     $$('.arena-die').forEach(button => button.addEventListener('click', () => addDie(+button.dataset.dice)));
     $('#roll-selected').addEventListener('click', () => runRoll([...selected.entries()]));
     $('#clear-dice').addEventListener('click', clear);
-    $('#toggle-dice-arena').addEventListener('click',()=>{const arena=$('.dice-arena'),button=$('#toggle-dice-arena'),collapsed=arena?.classList.toggle('rolling-box-hidden');if(collapsed===undefined)return;button.textContent=collapsed?'▸':'▾';button.title=collapsed?'Mostrar mesa de rolagem':'Ocultar mesa de rolagem';button.setAttribute('aria-label',button.title);button.setAttribute('aria-expanded',String(!collapsed))});
+    $('#toggle-dice-arena').addEventListener('click',()=>setRollingBoxCollapsed(!$('.dice-arena')?.classList.contains('rolling-box-hidden')));
     setArenaState('compact');
     render();
   }
