@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check app/scripts/mesa.js && node --check app/scripts/tabletop3d.js",
+    "publish:local": "powershell -ExecutionPolicy Bypass -File scripts/publish-local.ps1"
+  },
+  "dependencies": {
+    "@3d-dice/dice-box": "^1.1.4",
+    "pdfjs-dist": "^5.4.624"
+  }
+}
