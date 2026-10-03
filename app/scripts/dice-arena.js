@@ -106,16 +106,10 @@
   function build() {
     const host = $('.dice-bar');
     if (!host) return;
-    host.innerHTML = `<section class="dice-arena" aria-label="Arena de dados"><header class="dice-arena-controls"><div class="arena-inputs"><div class="arena-picker" aria-label="Dados disponíveis">${sides.map(die => `<button class="arena-die d${die}" data-dice="${die}" aria-pressed="false" title="Adicionar d${die}"><i>${symbols[die]}</i><span>d${die}</span><b hidden>0</b></button>`).join('')}</div><div class="arena-actions"><button id="roll-selected" class="gold-button" disabled>Jogar dados</button><button id="clear-dice" class="dark-button" disabled>Limpar</button></div><form id="custom-roll" class="arena-custom" title="Rolagem personalizada"><input id="dice-quantity" type="number" min="1" max="30" value="1" aria-label="Quantidade" /><span>d</span><input id="dice-sides" type="number" min="2" max="1000" value="20" aria-label="Lados" /><span>+</span><input id="dice-modifier" type="number" value="0" aria-label="Modificador" /><button class="dark-button">Outra rolagem</button></form></div></header><section class="dice-rolling-box" aria-label="Mesa de rolagem"><div class="dice-arena-stage"><div class="dice-tray" id="dice-tray" aria-label="Dados lançados"><section class="dice-3d-overlay" id="dice-3d-overlay" hidden aria-live="polite"><div id="dice-stage"></div></section></div></div><footer class="dice-arena-result"><strong id="roll-result">Pronto para rolar</strong><span id="roll-log">Selecione os dados acima.</span></footer></section></section>`;
+    host.innerHTML = `<section class="dice-arena" aria-label="Arena de dados"><header class="dice-arena-controls"><div class="arena-inputs"><div class="arena-picker" aria-label="Dados disponíveis">${sides.map(die => `<button class="arena-die d${die}" data-dice="${die}" aria-pressed="false" title="Adicionar d${die}"><i>${symbols[die]}</i><span>d${die}</span><b hidden>0</b></button>`).join('')}</div><div class="arena-actions"><button id="roll-selected" class="gold-button" disabled>Jogar dados</button><button id="clear-dice" class="dark-button" disabled>Limpar</button></div></div></header><section class="dice-rolling-box" aria-label="Mesa de rolagem"><div class="dice-arena-stage"><div class="dice-tray" id="dice-tray" aria-label="Dados lançados"><section class="dice-3d-overlay" id="dice-3d-overlay" hidden aria-live="polite"><div id="dice-stage"></div></section></div></div><footer class="dice-arena-result"><strong id="roll-result">Pronto para rolar</strong><span id="roll-log">Selecione os dados acima.</span></footer></section></section>`;
     $$('.arena-die').forEach(button => button.addEventListener('click', () => addDie(+button.dataset.dice)));
     $('#roll-selected').addEventListener('click', () => runRoll([...selected.entries()]));
     $('#clear-dice').addEventListener('click', clear);
-    $('#custom-roll').addEventListener('submit', event => {
-      event.preventDefault();
-      const quantity = Math.max(1, Math.min(30, +$('#dice-quantity').value || 1));
-      const die = Math.max(2, Math.min(1000, +$('#dice-sides').value || 20));
-      runRoll([[die, quantity]], Number($('#dice-modifier').value) || 0);
-    });
     setArenaState('compact');
     render();
   }
