@@ -9,6 +9,15 @@
   const notation = (quantity, die, modifier = 0) => `${quantity}d${die}${modifier ? modifier > 0 ? `+${modifier}` : modifier : ''}`;
   const randomDie = die => Math.floor(Math.random() * die) + 1;
 
+  function setArenaState(state) {
+    const arena = $('.dice-arena');
+    const dock = $('.bottom-dock');
+    const expanded = state !== 'compact';
+    document.body.dataset.diceArena = state;
+    arena?.classList.toggle('is-expanded', expanded);
+    dock?.classList.toggle('dice-expanded', expanded);
+  }
+
   function render() {
     const total = totalDice();
     $$('.arena-die').forEach(button => {
@@ -29,6 +38,7 @@
     window.Dice3DRoller?.clear();
     $('#roll-result').textContent = 'Pronto para rolar';
     $('#roll-log').textContent = 'Selecione os dados acima.';
+    setArenaState('compact');
     render();
   }
 
@@ -41,6 +51,7 @@
   async function runRoll(entries, modifier = 0) {
     if (rolling || !entries.length) return;
     rolling = true;
+    setArenaState('rolling');
     render();
     $$('.dice-arena button, .dice-arena input').forEach(control => { control.disabled = true; });
     const expression = entries.map(([die, quantity]) => notation(quantity, die)).join(' + ');
@@ -65,6 +76,7 @@
       $('#roll-log').textContent = `[${values.join(', ')}] · modo simples`;
     } finally {
       rolling = false;
+      setArenaState('result');
       $$('.dice-arena button, .dice-arena input').forEach(control => { control.disabled = false; });
       render();
     }
@@ -83,6 +95,7 @@
       const die = Math.max(2, Math.min(1000, +$('#dice-sides').value || 20));
       runRoll([[die, quantity]], Number($('#dice-modifier').value) || 0);
     });
+    setArenaState('compact');
     render();
   }
 
