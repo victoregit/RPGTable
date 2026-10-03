@@ -13,7 +13,7 @@ async function prepare() {
       enableShadows: true,
       shadowTransparency: 0.65,
       lightIntensity: 1.15,
-      scale: 3.4,
+      scale: 10,
       delay: 42,
       offscreen: false,
     });
