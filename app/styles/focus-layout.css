@@ -9,6 +9,8 @@
 
 .bottom-dock{min-height:68px!important;grid-template-columns:1fr!important;transition:min-height .2s ease}
 .character-tray{position:absolute;z-index:12;left:.7rem;bottom:calc(100% + .65rem);width:236px;padding:.3rem!important;overflow:visible;background:linear-gradient(135deg,#1a161ddd,#100e13dd);border:1px solid #4c424b;border-radius:8px;box-shadow:0 8px 20px #0009;backdrop-filter:blur(9px)}
+.tray-visibility-toggle,.arena-visibility-toggle{display:grid;place-items:center;width:26px;height:26px;padding:0;border:1px solid #5a4b5b;border-radius:6px;background:#211a25;color:#e6d9c8;font-size:.72rem;line-height:1}.tray-visibility-toggle:hover,.arena-visibility-toggle:hover{border-color:#d5a45d;color:#ffe0a0}
+.tray-visibility-toggle{position:absolute;right:0;top:-30px}.character-tray.is-collapsed{width:32px;height:32px;padding:0!important}.character-tray.is-collapsed .character-list,.character-tray.is-collapsed .tray-head{display:none}.character-tray.is-collapsed .tray-visibility-toggle{inset:3px}
 .tray-head{display:none}
 .character-list{display:grid;height:auto;grid-template-columns:repeat(3,72px);justify-content:center;overflow:visible;padding:0;gap:.35rem}
 .character-card{width:72px!important;min-width:72px!important;height:72px!important}
@@ -22,6 +24,7 @@
 .dice-arena-controls{height:68px;padding:.3rem .55rem;border-bottom:0;overflow:hidden}
 .dice-rolling-box{position:absolute;z-index:12;right:1rem;bottom:calc(100% + .65rem);width:278px;height:278px;display:grid;grid-template-rows:minmax(0,1fr) 58px;overflow:hidden;border:1px solid #514250;border-radius:9px;background:radial-gradient(ellipse at 50% 45%,#2a202b,#0d0b10 78%);box-shadow:0 14px 32px #000b}
 .dice-arena-stage{display:block;min-height:0;padding:.45rem}
+.arena-visibility-toggle{margin-left:auto;flex:0 0 auto}.dice-arena.rolling-box-hidden .dice-rolling-box{display:none}
 .dice-arena-result{display:grid;grid-template-columns:1fr;align-content:center;gap:.2rem;min-height:58px;padding:.45rem .65rem;border-top:1px solid #403541;background:#151016}
 .dice-arena-result strong{font-size:1.08rem;letter-spacing:.04em}.dice-arena-result span{white-space:normal;line-height:1.3}
 .arena-inputs{display:flex;align-items:center;gap:.55rem;min-width:0;flex:0 1 auto}
