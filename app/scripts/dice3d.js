@@ -50,13 +50,13 @@ async function startRoll() {
 
 window.Dice3DRoller = {
   async roll(notation) {
-    try { return await (await startRoll()).roll(notation); }
+    try { return await (await startRoll()).roll(notation, { newStartPoint: false }); }
     catch (error) { document.querySelector('#dice-3d-overlay').hidden = true; throw error; }
   },
   async rollMany(notations) {
     try {
       const dice = await startRoll();
-      const launches = notations.map((notation, index) => index === 0 ? dice.roll(notation) : dice.add(notation, { newStartPoint: false }));
+      const launches = notations.map((notation, index) => index === 0 ? dice.roll(notation, { newStartPoint: false }) : dice.add(notation, { newStartPoint: false }));
       return (await Promise.all(launches)).flat();
     } catch (error) {
       document.querySelector('#dice-3d-overlay').hidden = true;
