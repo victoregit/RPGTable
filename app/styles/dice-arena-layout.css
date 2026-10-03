@@ -1,0 +1,13 @@
+/* A mesa de rolagem ocupa toda a faixa central da arena. */
+.bottom-dock{min-height:272px}
+.dice-arena{height:272px;grid-template-rows:48px minmax(0,1fr) 42px}
+.dice-arena-stage{position:relative;min-height:0;overflow:hidden;background:radial-gradient(ellipse at 50% 55%,#3a2b3b,#100d12 74%)}
+.dice-arena-stage>.dice-tray{position:absolute!important;inset:0!important;width:auto!important;height:auto!important;min-width:0!important;min-height:0!important;flex:none!important;overflow:hidden;border:0!important;border-radius:0!important;background:radial-gradient(ellipse at 50% 50%,#302331,#0a090c 82%);box-shadow:inset 0 0 34px #000c}
+.dice-arena-stage>.dice-tray::after{content:'MESA DE ROLAGEM';left:.72rem;top:.52rem;color:#d5a45da8;font-size:.52rem;letter-spacing:.16em}
+.dice-arena-stage>.dice-tray .dice-3d-overlay{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+.dice-arena-stage>.dice-tray #dice-stage,.dice-arena-stage>.dice-tray #dice-stage canvas{position:absolute;inset:0;width:100%!important;height:100%!important}
+.dice-arena-result{padding:.4rem .72rem}
+.dice-arena-result strong{font-size:1rem}
+.side-panel{bottom:287px}.save-status{bottom:280px}
+@media(max-width:1040px){.bottom-dock{grid-template-columns:1fr}.dice-bar{border-left:0;border-top:1px solid #423946}.side-panel{bottom:354px}.save-status{bottom:359px}}
+@media(max-width:700px){.bottom-dock{min-height:368px}.dice-arena{height:278px;grid-template-rows:auto minmax(0,1fr) 38px}.dice-arena-controls{flex-wrap:wrap;gap:.28rem;padding:.3rem .45rem}.arena-picker{flex:1;justify-content:space-between}.arena-die{width:31px}.arena-actions{order:2}.arena-custom{order:3;margin-left:auto}.arena-custom button{font-size:0}.arena-custom button::after{content:'Rolar';font-size:.66rem}.side-panel{bottom:384px}.save-status{display:none}}
