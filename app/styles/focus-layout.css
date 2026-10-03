@@ -7,15 +7,16 @@
 .scene-status-card{grid-template-columns:52px 1fr;min-height:57px;padding:.2rem;background:linear-gradient(135deg,#1b161dde,#121015de);box-shadow:0 2px 7px #0008}
 .scene-piece{width:52px;height:52px}
 
-.bottom-dock{min-height:68px!important;grid-template-columns:minmax(152px,.36fr) minmax(0,1.64fr)!important;transition:min-height .2s ease}
-.character-tray{padding:.3rem .55rem!important;overflow:hidden}
+.bottom-dock{min-height:68px!important;grid-template-columns:1fr!important;transition:min-height .2s ease}
+.character-tray{position:absolute;z-index:12;left:.7rem;bottom:calc(100% + .65rem);width:176px;padding:.3rem!important;overflow:visible;background:linear-gradient(135deg,#1a161ddd,#100e13dd);border:1px solid #4c424b;border-radius:8px;box-shadow:0 8px 20px #0009;backdrop-filter:blur(9px)}
 .tray-head{display:none}
-.character-list{height:54px;align-items:center;overflow-x:auto;overflow-y:hidden;padding:.15rem 0 .2rem;gap:.45rem;scrollbar-width:thin}
-.character-card{width:48px!important;min-width:48px!important;height:48px!important}
-.character-select,.character-card .character-select{width:48px!important;height:48px!important;border-radius:50%!important}
-.character-card .character-select img,.character-card .character-select .placeholder{width:48px!important;height:48px!important;border-radius:50%;object-fit:cover!important}
+.character-list{display:grid;height:auto;grid-template-columns:repeat(3,52px);justify-content:center;overflow:visible;padding:0;gap:.35rem}
+.character-card{width:52px!important;min-width:52px!important;height:52px!important}
+.character-select,.character-card .character-select{width:52px!important;height:52px!important;border-radius:50%!important}
+.character-card .character-select img,.character-card .character-select .placeholder{width:52px!important;height:52px!important;border-radius:50%;object-fit:contain!important}
 .character-card.selected::after{content:none!important}
 .participant-toggle{right:-2px!important;top:-2px!important;width:16px!important;height:16px!important;font-size:.58rem!important;line-height:1!important}
+.dice-bar{border-left:0!important}
 
 .dice-arena{height:68px!important;grid-template-rows:68px 0 0!important;transition:height .2s ease,grid-template-rows .2s ease}
 .dice-arena-controls{height:68px;padding:.3rem .55rem;border-bottom:0;overflow:hidden}
@@ -52,13 +53,13 @@ body[data-dice-arena="rolling"] .save-status{bottom:280px!important}
 
 @media(max-width:1040px){
   .scene-controls{left:10px!important}
-  .bottom-dock{min-height:130px!important;grid-template-columns:1fr!important}
-  .character-tray{height:62px}
+  .bottom-dock{min-height:56px!important;grid-template-columns:1fr!important}
+  .character-tray{height:auto}
   .dice-arena{height:56px!important;grid-template-rows:56px 0 0!important}
   .dice-arena-controls{height:56px}
   .dice-arena.is-expanded{height:272px!important;grid-template-rows:48px minmax(0,1fr) 42px!important}
   .dice-arena.is-expanded .dice-arena-controls{height:48px}
-  .bottom-dock.dice-expanded{min-height:346px!important}
+  .bottom-dock.dice-expanded{min-height:272px!important}
   .side-panel{bottom:145px!important}
   .save-status{bottom:150px!important}
   body[data-dice-arena="rolling"] .side-panel{bottom:361px!important}
@@ -69,7 +70,12 @@ body[data-dice-arena="rolling"] .save-status{bottom:280px!important}
   .piece-rail{left:.35rem!important;top:68px!important;width:174px!important}
   .scene-status-card{grid-template-columns:44px 1fr;min-height:48px}
   .scene-piece{width:44px;height:44px}
-  .bottom-dock{min-height:130px!important}
+  .bottom-dock{min-height:56px!important}
+  .character-tray{left:.45rem;bottom:calc(100% + .45rem);width:142px;padding:.25rem!important}
+  .character-list{grid-template-columns:repeat(3,42px);gap:.28rem}
+  .character-card{width:42px!important;min-width:42px!important;height:42px!important}
+  .character-select,.character-card .character-select{width:42px!important;height:42px!important}
+  .character-card .character-select img,.character-card .character-select .placeholder{width:42px!important;height:42px!important}
   .dice-arena{height:56px!important;grid-template-rows:56px 0 0!important}
   .dice-arena-controls{height:56px;overflow:hidden;flex-wrap:nowrap}
   .arena-inputs{gap:.25rem;min-width:0}
@@ -82,7 +88,7 @@ body[data-dice-arena="rolling"] .save-status{bottom:280px!important}
   .dice-arena.is-expanded{height:278px!important;grid-template-rows:auto minmax(0,1fr) 38px!important}
   .dice-arena.is-expanded .dice-arena-controls{height:auto;overflow:visible;flex-wrap:wrap}
   .dice-arena.is-expanded .arena-custom{display:flex}
-  .bottom-dock.dice-expanded{min-height:368px!important}
+  .bottom-dock.dice-expanded{min-height:278px!important}
   .side-panel{bottom:145px!important}
   body[data-dice-arena="rolling"] .side-panel,body[data-dice-arena="result"] .side-panel{bottom:384px!important}
 }

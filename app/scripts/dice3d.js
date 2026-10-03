@@ -13,8 +13,8 @@ async function prepare() {
       enableShadows: true,
       shadowTransparency: 0.65,
       lightIntensity: 1.15,
-      scale: 10,
-      delay: 42,
+      scale: 7,
+      delay: 110,
       offscreen: false,
     });
     await box.init();
@@ -44,20 +44,25 @@ async function startRoll() {
   const overlay = mountTray();
   if (!overlay) throw Error('Bandeja de rolagem indisponível');
   overlay.hidden = false;
+  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  await new Promise(resolve => setTimeout(resolve, 240));
+  const stage = document.querySelector('#dice-stage');
+  if (!stage || stage.clientWidth < 160 || stage.clientHeight < 120) throw Error('Arena de rolagem ainda não está pronta');
+  const dice = await prepare();
+  window.dispatchEvent(new Event('resize'));
   await new Promise(resolve => requestAnimationFrame(resolve));
-  return prepare();
+  return dice;
 }
 
 window.Dice3DRoller = {
   async roll(notation) {
-    try { return await (await startRoll()).roll(notation, { newStartPoint: false }); }
+    try { return await (await startRoll()).roll(notation, { newStartPoint: true }); }
     catch (error) { document.querySelector('#dice-3d-overlay').hidden = true; throw error; }
   },
   async rollMany(notations) {
     try {
       const dice = await startRoll();
-      const launches = notations.map((notation, index) => index === 0 ? dice.roll(notation, { newStartPoint: false }) : dice.add(notation, { newStartPoint: false }));
-      return (await Promise.all(launches)).flat();
+      return await dice.roll(notations.join(' + '), { newStartPoint: true });
     } catch (error) {
       document.querySelector('#dice-3d-overlay').hidden = true;
       throw error;
